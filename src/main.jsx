@@ -1,11 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import React from "react"
+import ReactDOM from "react-dom"
+
+import App from "./App"
+import MediaContext from "./contexts/MediaContext"
+import "./index.css"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+    <MediaContext>
+		<App />
+    <MediaContext/>
+	</React.StrictMode>,
+	document.getElementById("root"),
 )
