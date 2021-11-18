@@ -1,11 +1,12 @@
-import Camera from "./components/Media/Camera"
-import Gallery from "./components/Media/Gallery"
+import { BrowserRouter } from 'react-router-dom';
+import Pages from './routes/Index';
 
 function App() {
 	return (
 		<div className="App">
-			<Camera />
-			<Gallery />
+			<BrowserRouter>
+				<Pages/>
+			</BrowserRouter>
 		</div>
 	)
 }

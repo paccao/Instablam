@@ -1,5 +1,4 @@
-import { useRef, useState, useEffect } from "react"
-import { useContext } from "react"
+import { useRef, useState, useEffect, useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
 import { cameraOff, cameraOn } from "./mediaUtils"
 import "./Media.css"
