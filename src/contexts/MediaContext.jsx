@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect } from "react"
 
 export const MediaContext = createContext()
 
@@ -18,6 +18,11 @@ export default function MediaProvider(props) {
 			takenAt: "Ostritch-time",
 		},
 	])
+	const [lastImageTaken, setLastImageTaken] = useState(null)
+
+	useEffect(() => {
+		if (galleryPictures) setLastImageTaken(galleryPictures[length])
+	}, [])
 
 	return (
 		<MediaContext.Provider
@@ -26,6 +31,8 @@ export default function MediaProvider(props) {
 				setVideoStream,
 				galleryPictures,
 				setGalleryPictures,
+				lastImageTaken,
+				setLastImageTaken,
 			}}
 		>
 			{props.children}

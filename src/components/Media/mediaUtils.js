@@ -31,3 +31,8 @@ export async function takePicture(videoStream) {
 	const picture = await URL.createObjectURL(blob)
 	// TODO: save pictured taken to a state variable
 }
+
+export function handleImgError(event) {
+	event.currentTarget.src = "http://placekitten.com/100/100"
+	event.currentTarget.alt = "A picture of a kitten."
+}
