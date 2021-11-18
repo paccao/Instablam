@@ -1,13 +1,13 @@
 import { createContext, useState } from "react"
 
-export const mediaContext = createContext()
+export const MediaContext = createContext()
 
 export default function MediaProvider() {
 	const [videoStream, setVideoStream] = useState(null)
 
 	return (
-		<MediaProvider.Provider value={{ videoStream, setVideoStream }}>
+		<MediaContext.Provider value={{ videoStream, setVideoStream }}>
 			{props.children}
-		</MediaProvider.Provider>
+		</MediaContext.Provider>
 	)
 }

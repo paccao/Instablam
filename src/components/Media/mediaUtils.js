@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import mediaContext from "../../contexts/mediaContext"
+import { MediaContext } from "../../contexts/MediaContext"
 
 export function cameraOff(videoElement, whenDone) {
 	videoElement.srcObject = null
@@ -7,7 +7,7 @@ export function cameraOff(videoElement, whenDone) {
 }
 
 export async function cameraOn(videoElement, showMessage, whenDone) {
-	const { videoStream, setVideoStream } = useContext(mediaContext)
+	const { videoStream, setVideoStream } = useContext(MediaContext)
 	const constraints = {
 		video: { facingMode: "user", width: 300, height: 200 },
 		audio: true,
@@ -29,7 +29,7 @@ export async function cameraOn(videoElement, showMessage, whenDone) {
 }
 
 export async function takePicture() {
-	const { videoStream } = useContext(mediaContext)
+	const { videoStream } = useContext(MediaContext)
 	const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
 
 	const blob = await imageCapture.takePhoto()
