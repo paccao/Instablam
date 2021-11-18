@@ -2,7 +2,7 @@ import { createContext, useState } from "react"
 
 export const MediaContext = createContext()
 
-export default function MediaProvider() {
+export default function MediaProvider(props) {
 	const [videoStream, setVideoStream] = useState(null)
 	const [galleryPictures, setGalleryPictures] = useState([
 		{

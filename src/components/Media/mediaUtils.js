@@ -1,21 +1,17 @@
-import { useContext } from "react"
-import { MediaContext } from "../../contexts/MediaContext"
-
 export function cameraOff(videoElement, whenDone) {
 	videoElement.srcObject = null
 	whenDone()
 }
 
-export async function cameraOn(videoElement, showMessage, whenDone) {
-	const { videoStream, setVideoStream } = useContext(MediaContext)
+export async function cameraOn(context, videoElement, showMessage, whenDone) {
 	const constraints = {
 		video: { facingMode: "user", width: 300, height: 200 },
 		audio: true,
 	}
 	try {
 		const stream = await navigator.mediaDevices.getUserMedia(constraints)
-		setVideoStream(stream)
-		videoElement.srcObject = videoStream
+		context.setVideoStream(stream)
+		videoElement.srcObject = context.videoStream
 		videoElement.addEventListener("loadedmetadata", () => {
 			videoElement.play()
 			whenDone()
@@ -28,8 +24,7 @@ export async function cameraOn(videoElement, showMessage, whenDone) {
 	}
 }
 
-export async function takePicture() {
-	const { videoStream } = useContext(MediaContext)
+export async function takePicture(videoStream) {
 	const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
 
 	const blob = await imageCapture.takePhoto()
