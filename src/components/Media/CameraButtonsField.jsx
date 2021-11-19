@@ -1,18 +1,28 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
-import { handleImgError } from "./mediaUtils"
+import { handleImgError, takePicture } from "./mediaUtils"
 
 import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
 
 export default function CameraButtonsField() {
-	const { lastImageTaken } = useContext(MediaContext)
+	const { videoStream, lastImageTaken, setLastImageTaken, pushToStateArray } =
+		useContext(MediaContext)
 
 	return (
 		<div>
 			<button>
 				<GiRapidshareArrow />
 			</button>
-			<button>
+			<button
+				onClick={() =>
+					takePicture(
+						videoStream,
+						setLastImageTaken,
+						pushToStateArray,
+						setGalleryPictures,
+					)
+				}
+			>
 				<GiCircle />
 			</button>
 			<button>

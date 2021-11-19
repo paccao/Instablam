@@ -21,8 +21,20 @@ export default function MediaProvider(props) {
 	const [lastImageTaken, setLastImageTaken] = useState(null)
 
 	useEffect(() => {
-		if (galleryPictures) setLastImageTaken(galleryPictures[length])
+		if (galleryPictures) setLastImageTaken(galleryPictures[length].url)
 	}, [])
+
+	/**
+	 * Used to push a new object into a state array.
+	 * @param {{}} newObj New data to be passed to the specified array.
+	 * @param {[]} specifiedArr the read property of a specified state array
+	 * @param {function} setSpecifiedArr the write property of a specified state array
+	 */
+	function pushToStateArray(newObj, specifiedArr, setSpecifiedArr) {
+		const stateOfArr = specifiedArr
+		const updatedArr = stateOfArr.push(newObj)
+		setSpecifiedArr(updatedArr)
+	}
 
 	return (
 		<MediaContext.Provider
@@ -33,6 +45,7 @@ export default function MediaProvider(props) {
 				setGalleryPictures,
 				lastImageTaken,
 				setLastImageTaken,
+				pushToStateArray,
 			}}
 		>
 			{props.children}

@@ -24,12 +24,25 @@ export async function cameraOn(context, videoElement, showMessage, whenDone) {
 	}
 }
 
-export async function takePicture(videoStream) {
+export async function takePicture(
+	videoStream,
+	setLastImageTaken,
+	pushToStateArray,
+	setGalleryPictures,
+) {
 	const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
 
 	const blob = await imageCapture.takePhoto()
 	const picture = await URL.createObjectURL(blob)
-	// TODO: save pictured taken to a state variable
+	const newPictureObj = {
+		alt: "Image taken with Instablam",
+		url: picture,
+		location: getImgLocation() || "Location unknown.",
+		takenAt: getImgTakenAt() || "Time unknown",
+	}
+
+	setLastImageTaken(picture)
+	pushToStateArray(newPictureObj, galleryPictures, setGalleryPictures)
 }
 
 export function handleImgError(event) {
