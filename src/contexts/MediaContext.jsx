@@ -24,6 +24,10 @@ export default function MediaProvider(props) {
 		if (galleryPictures) setLastImageTaken(galleryPictures[length].url)
 	}, [])
 
+	useEffect(() => {
+		//TODO: load local storage for persistance
+	}, [])
+
 	/**
 	 * Used to push a new object into a state array.
 	 * @param {{}} newObj New data to be passed to the specified array.
