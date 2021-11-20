@@ -6,7 +6,7 @@ export function cameraOff(videoElement, whenDone) {
 export async function cameraOn(context, videoElement, showMessage, whenDone) {
 	const constraints = {
 		video: { facingMode: "user", width: 300, height: 200 },
-		audio: true,
+		audio: false,
 	}
 	try {
 		const stream = await navigator.mediaDevices.getUserMedia(constraints)
@@ -37,8 +37,10 @@ export async function takePicture(
 	const newPictureObj = {
 		alt: "Image taken with Instablam",
 		url: picture,
-		location: getImgLocation() || "Location unknown.",
-		takenAt: getImgTakenAt() || "Time unknown",
+		// location: getImgLocation() || "Location unknown.",
+		// takenAt: getImgTakenAt() || "Time unknown",
+		location: "Location unknown.",
+		takenAt: "Time unknown",
 	}
 
 	setLastImageTaken(picture)
@@ -48,4 +50,11 @@ export async function takePicture(
 export function handleImgError(event) {
 	event.currentTarget.src = "http://placekitten.com/100/100"
 	event.currentTarget.alt = "A picture of a kitten."
+}
+
+function getImgLocation(){
+	return
+}
+function getImgTakenAt(){
+	return
 }

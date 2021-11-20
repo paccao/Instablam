@@ -7,7 +7,7 @@ import styled from "styled-components"
 import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
 
 export default function CameraButtonsField() {
-	const { videoStream, lastImageTaken, setLastImageTaken, pushToStateArray } =
+	const { videoStream, lastImageTaken, setLastImageTaken, pushToStateArray, setGalleryPictures } =
 		useContext(MediaContext)
 
 	return (
