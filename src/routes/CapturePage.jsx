@@ -25,4 +25,6 @@ const Header = styled.h1`
 	top:0;
 	width:100%;
 	text-align:center;
+	color: darkorange;
+	font-size:1.7em;
 `

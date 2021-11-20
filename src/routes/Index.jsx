@@ -7,7 +7,7 @@ import FullscreenDisplayPage from "./FullscreenDisplayPage"
 function Pages() {
 	return (
 		<Routes>
-			<Route path="/" exact element={<CapturePage />} />
+			<Route path="/" index element={<CapturePage />} />
 			<Route path="/gallery" element={<GalleryPage />} />
 			<Route path="/display" element={<FullscreenDisplayPage />} />
 		</Routes>

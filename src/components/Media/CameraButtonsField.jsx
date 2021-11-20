@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
 import { handleImgError, takePicture } from "./mediaUtils"
+import { Link } from "react-router-dom"
 
 import styled from "styled-components"
 import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
@@ -14,7 +15,7 @@ export default function CameraButtonsField() {
 			<MarginContainer>
 				<Button>
 					<DefaultButton>
-						<GiRapidshareArrow/>
+						<GiRapidshareArrow />
 					</DefaultButton>
 				</Button>
 				<Button
@@ -27,9 +28,11 @@ export default function CameraButtonsField() {
 						)
 					}
 				>
-					<GiCircle />
+					<TakePicButton>
+						<GiCircle />
+					</TakePicButton>
 				</Button>
-				<Button>
+				<Link to="/gallery">
 					<DefaultButton>
 						{lastImageTaken && (
 							<PreviewImage
@@ -39,7 +42,7 @@ export default function CameraButtonsField() {
 							/>
 						)}
 					</DefaultButton>
-				</Button>
+				</Link>
 			</MarginContainer>
 		</ButtonsContainer>
 	)
@@ -54,8 +57,8 @@ const ButtonsContainer = styled.section`
 const MarginContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
-	margin: 0em 1.2em;
+	align-items: center;
+	margin: 0em 1.2em 0.5em 1.2em;
 `
 
 const Button = styled.button`
@@ -66,14 +69,26 @@ const Button = styled.button`
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+	height: max-content;
 `
 
 const DefaultButton = styled.div`
 	background-color: #222;
-	color:#fff;
+	color: #fff;
 	width: 35px;
 	height: 35px;
 	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+
+const TakePicButton = styled.div`
+	background-color: #222;
+	border-radius: 50%;
+	color: #fff;
+	width: 58px;
+	height: 58px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
