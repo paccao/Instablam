@@ -7,13 +7,13 @@ export default function MediaProvider(props) {
 	const [galleryPictures, setGalleryPictures] = useState([
 		{
 			alt: "Picture of a cow",
-			url: "cow-wolfgang-hasselmann-unsplash.jpg",
+			url: "/images/cow-wolfgang-hasselmann-unsplash.jpg",
 			location: "Cow-land",
 			takenAt: "Cow-time",
 		},
 		{
 			alt: "Picture of an ostritch",
-			url: "ostritch-ricardo-iv-tamayo-unsplash.jpg",
+			url: "/images/ostritch-ricardo-iv-tamayo-unsplash.jpg",
 			location: "Ostritch-land",
 			takenAt: "Ostritch-time",
 		},
