@@ -35,9 +35,7 @@ export default function MediaProvider(props) {
 	 * @param {function} setSpecifiedArr the write property of a specified state array
 	 */
 	function pushToStateArray(newObj, specifiedArr, setSpecifiedArr) {
-		const stateOfArr = specifiedArr
-		const updatedArr = stateOfArr.push(newObj)
-		setSpecifiedArr(updatedArr)
+		setSpecifiedArr([...specifiedArr, newObj])
 	}
 
 	return (

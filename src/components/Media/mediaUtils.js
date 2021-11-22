@@ -28,19 +28,24 @@ export async function takePicture(
 	videoStream,
 	setLastImageTaken,
 	pushToStateArray,
+	galleryPictures,
 	setGalleryPictures,
 ) {
 	const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
 
 	const blob = await imageCapture.takePhoto()
 	const picture = await URL.createObjectURL(blob)
+
+	const datetime = getImgTakenAt()
+	let takenAt
+	if (datetime.time && datetime.date) {
+		takenAt = datetime.date + ", " + datetime.time
+	} else takenAt = "Time unknown"
+
 	const newPictureObj = {
 		alt: "Image taken with Instablam",
 		url: picture,
-		// location: getImgLocation() || "Location unknown.",
-		// takenAt: getImgTakenAt() || "Time unknown",
-		location: "Location unknown.",
-		takenAt: "Time unknown",
+		takenAt,
 	}
 
 	setLastImageTaken(picture)
@@ -55,6 +60,21 @@ export function handleImgError(event) {
 function getImgLocation(){
 	return
 }
-function getImgTakenAt(){
-	return
+
+function getImgTakenAt() {
+	const currentdate = new Date()
+	const date =
+		currentdate.getFullYear() +
+		"/" +
+		(currentdate.getMonth() + 1) +
+		"/" +
+		currentdate.getDate()
+
+	const time =
+		currentdate.getHours() +
+		":" +
+		currentdate.getMinutes() +
+		":" +
+		currentdate.getSeconds()
+	return { date, time }
 }
