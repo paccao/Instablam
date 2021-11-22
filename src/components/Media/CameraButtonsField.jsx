@@ -7,8 +7,24 @@ import styled from "styled-components"
 import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
 
 export default function CameraButtonsField() {
-	const { videoStream, lastImageTaken, setLastImageTaken, pushToStateArray, setGalleryPictures } =
-		useContext(MediaContext)
+	const {
+		videoStream,
+		lastImageTaken,
+		setLastImageTaken,
+		pushToStateArray,
+		galleryPictures,
+		setGalleryPictures,
+	} = useContext(MediaContext)
+
+	function takePic() {
+		takePicture(
+			videoStream,
+			setLastImageTaken,
+			pushToStateArray,
+			galleryPictures,
+			setGalleryPictures,
+		)
+	}
 
 	return (
 		<ButtonsContainer>
@@ -18,16 +34,7 @@ export default function CameraButtonsField() {
 						<GiRapidshareArrow />
 					</DefaultButton>
 				</Button>
-				<Button
-					onClick={() =>
-						takePicture(
-							videoStream,
-							setLastImageTaken,
-							pushToStateArray,
-							setGalleryPictures,
-						)
-					}
-				>
+				<Button onClick={takePic}>
 					<TakePicButton>
 						<GiCircle />
 					</TakePicButton>
