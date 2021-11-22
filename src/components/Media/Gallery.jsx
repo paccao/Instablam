@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
+import styled from "styled-components"
 
 export default function Gallery() {
 	const { galleryPictures } = useContext(MediaContext)
@@ -10,13 +11,16 @@ export default function Gallery() {
 				galleryPictures.map((obj, index) => {
 					return (
 						<div key={index}>
-							<img src={obj.url} alt={obj.alt} />
-							<figcaption>{
-								/**Location icon */ `${obj.location}, ${obj.takenAt}`
-							}</figcaption>
+							<Image src={obj.url} alt={obj.alt} />
+							<figcaption>{`${obj.location}, ${obj.takenAt}`}</figcaption>
 						</div>
 					)
 				})}
 		</div>
 	)
 }
+
+const Image = styled.img`
+	height: auto;
+	width: 150px;
+`
