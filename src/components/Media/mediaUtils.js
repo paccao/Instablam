@@ -45,6 +45,7 @@ export async function takePicture(
 	const newPictureObj = {
 		alt: "Image taken with Instablam",
 		url: picture,
+		location: (await getLocation()) || "Location unknown",
 		takenAt,
 	}
 
@@ -57,8 +58,28 @@ export function handleImgError(event) {
 	event.currentTarget.alt = "A picture of a kitten."
 }
 
-function getImgLocation(){
-	return
+async function getLocation() {
+	let location
+	try {
+		location = await getImgLocation()
+	} catch (error) {
+		console.log("No location")
+	}
+	return location
+}
+
+function getImgLocation() {
+	return new Promise((resolve, reject) => {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				const coordinates = `${position.coords.latitude}, ${position.coords.longitude}`
+
+				resolve(coordinates)
+			},
+			(error) => reject(error),
+			{ enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+		)
+	})
 }
 
 function getImgTakenAt() {
