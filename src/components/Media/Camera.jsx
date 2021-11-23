@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
 import { cameraOff, cameraOn } from "./mediaUtils"
 import "./Media.css"
@@ -22,14 +22,15 @@ export default function Camera() {
 
 	const handleCameraToggle = () => {
 		if (cameraIsOn) {
-			cameraOff(videoRef.current, () => setCameraIsOn(false))
+			cameraOff(videoRef.current, videoStream, setVideoStream)
+			setCameraIsOn(false)
 		} else {
 			cameraOn(
 				{ videoStream, setVideoStream },
 				videoRef.current,
 				setStatusMessage,
-				() => setCameraIsOn(true),
 			)
+			setCameraIsOn(true)
 		}
 	}
 

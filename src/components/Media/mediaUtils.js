@@ -1,13 +1,14 @@
-export function cameraOff(videoElement, whenDone) {
+export function cameraOff(videoElement, videoStream, setVideoStream) {
 	videoElement.srcObject = null
-	whenDone()
+	let tracks = videoStream.getTracks()
+	tracks.forEach((track) => track.stop())
+	setVideoStream(null)
 }
 
 export async function cameraOn(
 	context,
 	videoElement,
 	showMessage,
-	whenDone,
 	optionalConstraints = {},
 ) {
 	let constraints
@@ -24,10 +25,9 @@ export async function cameraOn(
 	try {
 		const stream = await navigator.mediaDevices.getUserMedia(constraints)
 		context.setVideoStream(stream)
-		videoElement.srcObject = context.videoStream
+		videoElement.srcObject = stream
 		videoElement.addEventListener("loadedmetadata", () => {
 			videoElement.play()
-			whenDone()
 		})
 	} catch (error) {
 		console.log("Error message: ", error.message)

@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
 import styled from "styled-components"
+import { MdDownload } from "react-icons/md"
 
 export default function Gallery() {
 	const { galleryPictures } = useContext(MediaContext)
@@ -12,6 +13,10 @@ export default function Gallery() {
 						<div key={index}>
 							<Image src={obj.url} alt={obj.alt} />
 							<figcaption>{`${obj.location}, ${obj.takenAt}`}</figcaption>
+							<a href={obj.url} download>
+								<MdDownload />
+								<p>Download</p>
+							</a>
 						</div>
 					)
 				})}

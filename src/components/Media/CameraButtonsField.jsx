@@ -39,17 +39,16 @@ export default function CameraButtonsField() {
 			{ videoStream, setVideoStream },
 			videoRef.current,
 			setStatusMessage,
-			() => setCameraIsOn(true),
 			{
 				video: { facingMode: facingMode, width: 300, height: 200 },
 				audio: false,
 			},
 		)
+		setCameraIsOn(true)
 	}
 
 	function swapFacingDir() {
 		if (!videoStream) return
-
 		if (camFacingDir === "user") {
 			setCamOn("environment")
 			setCamFacingDir("environment")
