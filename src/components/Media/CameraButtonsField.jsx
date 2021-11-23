@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
-import { handleImgError, takePicture } from "./mediaUtils"
+import { cameraOn, handleImgError, takePicture } from "./mediaUtils"
 import { Link } from "react-router-dom"
 
 import styled from "styled-components"
@@ -9,28 +9,63 @@ import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
 export default function CameraButtonsField() {
 	const {
 		videoStream,
+		setVideoStream,
 		lastImageTaken,
 		setLastImageTaken,
 		pushToStateArray,
 		galleryPictures,
 		setGalleryPictures,
+		camFacingDir,
+		setCamFacingDir,
+		videoRef,
+		setStatusMessage,
+		setCameraIsOn,
 	} = useContext(MediaContext)
 
 	function takePic() {
-		takePicture(
-			videoStream,
-			setLastImageTaken,
-			pushToStateArray,
-			galleryPictures,
-			setGalleryPictures,
+		if (!videoStream) return
+		else
+			takePicture(
+				videoStream,
+				setLastImageTaken,
+				pushToStateArray,
+				galleryPictures,
+				setGalleryPictures,
+			)
+	}
+
+	function setCamOn(facingMode) {
+		cameraOn(
+			{ videoStream, setVideoStream },
+			videoRef.current,
+			setStatusMessage,
+			() => setCameraIsOn(true),
+			{
+				video: { facingMode: facingMode, width: 300, height: 200 },
+				audio: false,
+			},
 		)
+	}
+
+	function swapFacingDir() {
+		if (!videoStream) return
+
+		if (camFacingDir === "user") {
+			setCamOn("environment")
+			setCamFacingDir("environment")
+			return
+		} else if (camFacingDir === "environment") {
+			setCamOn("user")
+			setCamFacingDir("user")
+			return
+		}
 	}
 
 	return (
 		<ButtonsContainer>
 			<MarginContainer>
 				<Button>
-					<DefaultButton>
+					<DefaultButton onClick={swapFacingDir}>
 						<GiRapidshareArrow />
 					</DefaultButton>
 				</Button>

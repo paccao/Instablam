@@ -4,7 +4,7 @@ import CapturePage from "./CapturePage"
 import GalleryPage from "./GalleryPage"
 import FullscreenDisplayPage from "./FullscreenDisplayPage"
 
-function Pages() {
+export default function Pages() {
 	return (
 		<Routes>
 			<Route path="/" index element={<CapturePage />} />
@@ -13,5 +13,3 @@ function Pages() {
 		</Routes>
 	)
 }
-
-export default Pages

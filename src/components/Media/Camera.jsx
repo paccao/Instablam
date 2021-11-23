@@ -5,17 +5,22 @@ import "./Media.css"
 
 export default function Camera() {
 	const [canUseMD, setCanUseMD] = useState(false)
-	const [cameraIsOn, setCameraIsOn] = useState(false)
-	const [statusMessage, setStatusMessage] = useState("")
-	const videoRef = useRef(null)
 
-	const { videoStream, setVideoStream } = useContext(MediaContext)
+	const {
+		videoStream,
+		setVideoStream,
+		cameraIsOn,
+		setCameraIsOn,
+		statusMessage,
+		setStatusMessage,
+		videoRef,
+	} = useContext(MediaContext)
 
 	useEffect(() => {
 		setCanUseMD("mediaDevices" in navigator)
 	}, [])
 
-	const handleCameraToggle = (e) => {
+	const handleCameraToggle = () => {
 		if (cameraIsOn) {
 			cameraOff(videoRef.current, () => setCameraIsOn(false))
 		} else {

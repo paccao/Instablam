@@ -1,7 +1,6 @@
 import { BrowserRouter } from "react-router-dom"
 import Pages from "./routes/Index"
-
-function App() {
+export default function App() {
 	return (
 		<>
 			<BrowserRouter>
@@ -10,5 +9,3 @@ function App() {
 		</>
 	)
 }
-
-export default App

@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 import { AiOutlineArrowLeft } from "react-icons/ai"
+
 export default function GalleryHeader() {
 	return (
 		<header>
@@ -12,12 +13,12 @@ export default function GalleryHeader() {
 			</Top>
 			<hr />
 			<Bottom>
-        <button>T</button>
-        <div>
-          <button>S</button>
-          <button>G</button>
-        </div>
-      </Bottom>
+				<button>T</button>
+				<div>
+					<button>S</button>
+					<button>G</button>
+				</div>
+			</Bottom>
 		</header>
 	)
 }

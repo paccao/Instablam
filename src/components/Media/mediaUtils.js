@@ -3,11 +3,24 @@ export function cameraOff(videoElement, whenDone) {
 	whenDone()
 }
 
-export async function cameraOn(context, videoElement, showMessage, whenDone) {
-	const constraints = {
-		video: { facingMode: "user", width: 300, height: 200 },
-		audio: false,
+export async function cameraOn(
+	context,
+	videoElement,
+	showMessage,
+	whenDone,
+	optionalConstraints = {},
+) {
+	let constraints
+	// Checks if the camera should use default constraints or optional ones
+	if (!Object.keys(optionalConstraints).length) {
+		constraints = {
+			video: { facingMode: "user", width: 300, height: 200 },
+			audio: false,
+		}
+	} else {
+		constraints = optionalConstraints
 	}
+
 	try {
 		const stream = await navigator.mediaDevices.getUserMedia(constraints)
 		context.setVideoStream(stream)
@@ -60,6 +73,8 @@ export function handleImgError(event) {
 
 async function getLocation() {
 	let location
+	// TODO: Set a state variable that switches an icon in the gallery,
+	// where the location text is written out
 	try {
 		location = await getImgLocation()
 	} catch (error) {

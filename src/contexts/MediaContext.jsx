@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useState, useEffect, useRef } from "react"
 
 export const MediaContext = createContext()
 
@@ -19,6 +19,10 @@ export default function MediaProvider(props) {
 		},
 	])
 	const [lastImageTaken, setLastImageTaken] = useState(null)
+	const [camFacingDir, setCamFacingDir] = useState("user")
+	const [cameraIsOn, setCameraIsOn] = useState(false)
+	const [statusMessage, setStatusMessage] = useState("")
+	const videoRef = useRef(null)
 
 	useEffect(() => {
 		if (galleryPictures) setLastImageTaken(galleryPictures[length].url)
@@ -48,6 +52,13 @@ export default function MediaProvider(props) {
 				lastImageTaken,
 				setLastImageTaken,
 				pushToStateArray,
+				camFacingDir,
+				setCamFacingDir,
+				cameraIsOn,
+				setCameraIsOn,
+				statusMessage,
+				setStatusMessage,
+				videoRef,
 			}}
 		>
 			{props.children}
