@@ -23,6 +23,7 @@ export default function MediaProvider(props) {
 	const [cameraIsOn, setCameraIsOn] = useState(false)
 	const [statusMessage, setStatusMessage] = useState("")
 	const videoRef = useRef(null)
+	const [canUseMD, setCanUseMD] = useState(false)
 
 	useEffect(() => {
 		if (galleryPictures) setLastImageTaken(galleryPictures[length].url)
@@ -59,6 +60,8 @@ export default function MediaProvider(props) {
 				statusMessage,
 				setStatusMessage,
 				videoRef,
+				canUseMD,
+				setCanUseMD,
 			}}
 		>
 			{props.children}

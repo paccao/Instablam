@@ -31,6 +31,7 @@ export default function CameraButtonsField() {
 				pushToStateArray,
 				galleryPictures,
 				setGalleryPictures,
+				setStatusMessage
 			)
 	}
 

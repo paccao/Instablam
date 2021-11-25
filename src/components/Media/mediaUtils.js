@@ -43,27 +43,30 @@ export async function takePicture(
 	pushToStateArray,
 	galleryPictures,
 	setGalleryPictures,
+	setStatusMessage,
 ) {
-	const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
+	try {
+		const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
+		const blob = await imageCapture.takePhoto()
+		const picture = await URL.createObjectURL(blob)
 
-	const blob = await imageCapture.takePhoto()
-	const picture = await URL.createObjectURL(blob)
+		const datetime = getImgTakenAt()
+		let takenAt
+		if (datetime.time && datetime.date) {
+			takenAt = datetime.date + ", " + datetime.time
+		} else takenAt = "Time unknown"
 
-	const datetime = getImgTakenAt()
-	let takenAt
-	if (datetime.time && datetime.date) {
-		takenAt = datetime.date + ", " + datetime.time
-	} else takenAt = "Time unknown"
-
-	const newPictureObj = {
-		alt: "Image taken with Instablam",
-		url: picture,
-		location: (await getLocation()) || "Location unknown",
-		takenAt,
+		const newPictureObj = {
+			alt: "Image taken with Instablam",
+			url: picture,
+			location: (await getLocation()) || "Location unknown",
+			takenAt,
+		}
+		setLastImageTaken(picture)
+		pushToStateArray(newPictureObj, galleryPictures, setGalleryPictures)
+	} catch (error) {
+		setStatusMessage(`Error occured! '${error.message}'.`)
 	}
-
-	setLastImageTaken(picture)
-	pushToStateArray(newPictureObj, galleryPictures, setGalleryPictures)
 }
 
 export function handleImgError(event) {
