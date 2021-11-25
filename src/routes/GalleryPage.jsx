@@ -7,14 +7,17 @@ export default function GalleryPage() {
 	const [galleryFullscreen, setGalleryFullscreen] = useState(true)
 	return (
 		<Container>
-			<GalleryHeader />
-			<Gallery />
+			<GalleryHeader
+				galleryFullscreen={galleryFullscreen}
+				setGalleryFullscreen={setGalleryFullscreen}
+			/>
+			{galleryFullscreen ? <Gallery /> : null}
 		</Container>
 	)
 }
 
 const Container = styled.div`
-	background-color: #fbfbfb;
+	background-color: #333;
 	position: relative;
 	height: 100vh;
 	width: 100vw;

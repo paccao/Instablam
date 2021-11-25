@@ -1,7 +1,8 @@
 import { useContext } from "react"
+import styled from "styled-components"
+import { IoMdPower } from "react-icons/io"
 import { cameraOff, cameraOn } from "../../components/Media/mediaUtils"
 import { MediaContext } from "../../contexts/MediaContext"
-import { IoMdPower } from "react-icons/io"
 
 export default function CameraOnToggleBtn() {
 	const {
@@ -28,12 +29,23 @@ export default function CameraOnToggleBtn() {
 	}
 
 	return (
-		<div onClick={handleCameraToggle}>
+		<Button onClick={handleCameraToggle}>
 			{cameraIsOn ? (
 				<IoMdPower className="powerOn" />
 			) : (
 				<IoMdPower className="powerOff" />
 			)}
-		</div>
+		</Button>
 	)
 }
+
+const Button = styled.button`
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+	height: max-content;
+`

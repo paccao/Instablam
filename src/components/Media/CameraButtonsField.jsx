@@ -4,21 +4,17 @@ import styled from "styled-components"
 import { GiCircle } from "react-icons/gi"
 
 import { MediaContext } from "../../contexts/MediaContext"
-import { cameraOn, handleImgError, takePicture } from "./mediaUtils"
+import { handleImgError, takePicture } from "./mediaUtils"
 import CameraOnToggleBtn from "./CameraOnToggleBtn"
 
 export default function CameraButtonsField() {
 	const {
 		videoStream,
-		setVideoStream,
 		lastImageTaken,
 		setLastImageTaken,
 		pushToStateArray,
 		galleryPictures,
 		setGalleryPictures,
-		camFacingDir,
-		setCamFacingDir,
-		videoRef,
 		setStatusMessage,
 		setCameraIsOn,
 	} = useContext(MediaContext)
@@ -38,32 +34,6 @@ export default function CameraButtonsField() {
 				setGalleryPictures,
 				setStatusMessage,
 			)
-	}
-
-	function setCamOn(facingMode) {
-		cameraOn(
-			{ videoStream, setVideoStream },
-			videoRef.current,
-			setStatusMessage,
-			{
-				video: { facingMode: facingMode, width: 300, height: 200 },
-				audio: false,
-			},
-		)
-		setCameraIsOn(true)
-	}
-
-	function swapFacingDir() {
-		if (!videoStream) return
-		if (camFacingDir === "user") {
-			setCamOn("environment")
-			setCamFacingDir("environment")
-			return
-		} else if (camFacingDir === "environment") {
-			setCamOn("user")
-			setCamFacingDir("user")
-			return
-		}
 	}
 
 	return (

@@ -11,7 +11,6 @@ export default function CapturePage() {
 			</Header>
 			<Camera />
 			<CameraButtonsField />
-			<Gallery />
 		</Container>
 	)
 }
