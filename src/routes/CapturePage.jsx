@@ -36,13 +36,9 @@ export default function CapturePage() {
 		<Container>
 			<Header>
 				<h1>Instablam</h1>
-				{canUseMD ? (
-					<button onClick={handleCameraToggle}>
-						{cameraIsOn ? "Turn camera off" : "Turn camera on"}
-					</button>
-				) : (
-					<p>No support for a camera on this device found.</p>
-				)}
+				<button onClick={handleCameraToggle}>
+					{cameraIsOn ? "Turn camera off" : "Turn camera on"}
+				</button>
 			</Header>
 			<Camera />
 			<CameraButtonsField />
