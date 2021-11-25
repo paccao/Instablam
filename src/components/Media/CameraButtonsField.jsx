@@ -1,10 +1,11 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
+import { Link } from "react-router-dom"
+import styled from "styled-components"
+import { GiCircle } from "react-icons/gi"
+
 import { MediaContext } from "../../contexts/MediaContext"
 import { cameraOn, handleImgError, takePicture } from "./mediaUtils"
-import { Link } from "react-router-dom"
-
-import styled from "styled-components"
-import { GiRapidshareArrow, GiCircle } from "react-icons/gi"
+import CameraOnToggleBtn from "./CameraOnToggleBtn"
 
 export default function CameraButtonsField() {
 	const {
@@ -22,6 +23,10 @@ export default function CameraButtonsField() {
 		setCameraIsOn,
 	} = useContext(MediaContext)
 
+	useEffect(() => {
+		setCameraIsOn(false)
+	}, [])
+
 	function takePic() {
 		if (!videoStream) return
 		else
@@ -31,7 +36,7 @@ export default function CameraButtonsField() {
 				pushToStateArray,
 				galleryPictures,
 				setGalleryPictures,
-				setStatusMessage
+				setStatusMessage,
 			)
 	}
 
@@ -64,11 +69,9 @@ export default function CameraButtonsField() {
 	return (
 		<ButtonsContainer>
 			<MarginContainer>
-				<Button>
-					<DefaultButton onClick={swapFacingDir}>
-						<GiRapidshareArrow />
-					</DefaultButton>
-				</Button>
+				<DefaultButton>
+					<CameraOnToggleBtn />
+				</DefaultButton>
 				<Button onClick={takePic}>
 					<TakePicButton>
 						<GiCircle />
@@ -116,9 +119,9 @@ const Button = styled.button`
 
 const DefaultButton = styled.div`
 	background-color: #222;
-	color: #fff;
-	width: 35px;
-	height: 35px;
+	color: #8b8;
+	width: 40px;
+	height: 40px;
 	border-radius: 5px;
 	display: flex;
 	justify-content: center;
@@ -128,7 +131,7 @@ const DefaultButton = styled.div`
 const TakePicButton = styled.div`
 	background-color: #222;
 	border-radius: 50%;
-	color: #fff;
+	color:#fff;
 	width: 58px;
 	height: 58px;
 	display: flex;

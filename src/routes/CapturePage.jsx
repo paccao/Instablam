@@ -1,44 +1,13 @@
-import Camera from "../components/Media/Camera"
-import CameraButtonsField from "../components/Media/CameraButtonsField"
 import styled from "styled-components"
+import Camera from "../components/Media/Camera"
 import Gallery from "../components/Media/Gallery"
-
-import { useContext } from "react"
-import { cameraOff, cameraOn } from "../components/Media/mediaUtils"
-import { MediaContext } from "../contexts/MediaContext"
+import CameraButtonsField from "../components/Media/CameraButtonsField"
 
 export default function CapturePage() {
-	const {
-		videoStream,
-		setVideoStream,
-		cameraIsOn,
-		setCameraIsOn,
-		setStatusMessage,
-		videoRef,
-		canUseMD,
-	} = useContext(MediaContext)
-
-	const handleCameraToggle = () => {
-		if (cameraIsOn) {
-			cameraOff(videoRef.current, videoStream, setVideoStream)
-			setCameraIsOn(false)
-		} else {
-			cameraOn(
-				{ videoStream, setVideoStream },
-				videoRef.current,
-				setStatusMessage,
-			)
-			setCameraIsOn(true)
-		}
-	}
-
 	return (
 		<Container>
 			<Header>
 				<h1>Instablam</h1>
-				<button onClick={handleCameraToggle}>
-					{cameraIsOn ? "Turn camera off" : "Turn camera on"}
-				</button>
 			</Header>
 			<Camera />
 			<CameraButtonsField />
@@ -55,12 +24,13 @@ const Container = styled.div`
 `
 
 const Header = styled.header`
-	margin-top: 0px;
-	position: absolute;
-	top: 0;
-	width: 100%;
-	text-align: center;
-	color: darkorange;
-	font-size: 1.7em;
-	z-index: 10;
+	h1 {
+		width: 100%;
+		margin-top: 0px;
+		position: absolute;
+		top: 0;
+		text-align: center;
+		color: #8d8;
+		font-size: 1.7em;
+	}
 `

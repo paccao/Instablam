@@ -2,3 +2,10 @@
 	width: 100vw;
 	height: 100vh;
 }
+
+.powerOn {
+	color: #4b4;
+}
+.powerOff {
+	color: #b44;
+}
