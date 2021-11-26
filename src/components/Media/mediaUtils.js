@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid"
+
 export function cameraOff(videoElement, videoStream, setVideoStream) {
 	videoElement.srcObject = null
 	let tracks = videoStream.getTracks()
@@ -57,6 +59,7 @@ export async function takePicture(
 		} else takenAt = "Time unknown"
 
 		const newPictureObj = {
+			id: nanoid(),
 			alt: "Image taken with Instablam",
 			url: picture,
 			location: (await getLocation()) || "Location unknown",
@@ -67,6 +70,11 @@ export async function takePicture(
 	} catch (error) {
 		setStatusMessage(`Error occured! '${error.message}'.`)
 	}
+}
+
+export function deletePhoto(gallery, setGalleryPictures, id) {
+	const newPhotosArr = gallery.filter((picture) => picture.id !== id)
+	setGalleryPictures(()=>[...newPhotosArr])
 }
 
 export function handleImgError(event) {

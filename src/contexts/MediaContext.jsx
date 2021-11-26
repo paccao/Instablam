@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useRef } from "react"
+import { nanoid } from "nanoid"
 
 export const MediaContext = createContext()
 
@@ -6,12 +7,14 @@ export default function MediaProvider(props) {
 	const [videoStream, setVideoStream] = useState(null)
 	const [galleryPictures, setGalleryPictures] = useState([
 		{
+			id: nanoid(),
 			alt: "Picture of a cow",
 			url: "/images/cow-wolfgang-hasselmann-unsplash.jpg",
 			location: "Cow-land",
 			takenAt: "Cow-time",
 		},
 		{
+			id: nanoid(),
 			alt: "Picture of an ostritch",
 			url: "/images/ostritch-ricardo-iv-tamayo-unsplash.jpg",
 			location: "Ostritch-land",
