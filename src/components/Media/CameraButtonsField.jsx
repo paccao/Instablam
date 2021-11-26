@@ -20,6 +20,7 @@ export default function CameraButtonsField() {
 	} = useContext(MediaContext)
 
 	useEffect(() => {
+		if (galleryPictures) setLastImageTaken(galleryPictures.at(-1).url)
 		setCameraIsOn(false)
 	}, [])
 

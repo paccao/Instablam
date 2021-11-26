@@ -19,6 +19,8 @@ export default function GalleryPage() {
 const Container = styled.div`
 	background-color: #333;
 	position: relative;
-	height: 100vh;
+	min-height: 100vh;
 	width: 100vw;
+	display: flex;
+	flex-direction:column;
 `

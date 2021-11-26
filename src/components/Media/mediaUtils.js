@@ -50,7 +50,7 @@ export async function takePicture(
 	try {
 		const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
 		const blob = await imageCapture.takePhoto()
-		const picture = await URL.createObjectURL(blob)
+		const picture = URL.createObjectURL(blob)
 
 		const datetime = getImgTakenAt()
 		let takenAt

@@ -13,7 +13,7 @@ export default function Gallery() {
 			{galleryPictures &&
 				galleryPictures.map((obj, index) => {
 					return (
-						<div key={`${obj.id}${index}`}>
+						<Card key={`${obj.id}${index}`}>
 							<Image src={obj.url} alt={obj.alt} />
 							<figcaption>{`${obj.location}, ${obj.takenAt}`}</figcaption>
 							<a href={obj.url} download>
@@ -32,16 +32,24 @@ export default function Gallery() {
 								<BsTrash />
 								<p>Delete</p>
 							</Button>
-						</div>
+						</Card>
 					)
 				})}
 		</div>
 	)
 }
 
+const Card = styled.div`
+border-bottom: 1px solid #222;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+margin-bottom: 0.5rem;
+`
+
+
 const Image = styled.img`
 	height: auto;
-	width: 150px;
+	width: 100%;
 `
 
 const Button = styled.button`

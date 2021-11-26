@@ -29,7 +29,7 @@ export default function MediaProvider(props) {
 	const [canUseMD, setCanUseMD] = useState(false)
 
 	useEffect(() => {
-		if (galleryPictures) setLastImageTaken(galleryPictures[length].url)
+		if (galleryPictures) setLastImageTaken(galleryPictures.at(-1).url)
 	}, [])
 
 	useEffect(() => {
