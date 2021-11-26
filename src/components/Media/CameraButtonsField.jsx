@@ -43,12 +43,12 @@ export default function CameraButtonsField() {
 				<DefaultButton>
 					<CameraOnToggleBtn />
 				</DefaultButton>
-				<Button onClick={takePic}>
+				<Button aria-label="Take photo button" onClick={takePic}>
 					<TakePicButton>
 						<GiCircle />
 					</TakePicButton>
 				</Button>
-				<Link to="/gallery">
+				<Link aria-label="Open gallery" to="/gallery">
 					<DefaultButton>
 						{lastImageTaken && (
 							<PreviewImage

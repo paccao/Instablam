@@ -6,7 +6,7 @@ export default function GalleryHeader() {
 	return (
 		<>
 			<Header>
-				<Link className="iconContainer" to="/">
+				<Link aria-label="Go back to capture page" className="iconContainer" to="/">
 					<AiOutlineArrowLeft className="icon" />
 				</Link>
 				<h2>Gallery</h2>

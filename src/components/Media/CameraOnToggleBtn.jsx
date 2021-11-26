@@ -29,7 +29,7 @@ export default function CameraOnToggleBtn() {
 	}
 
 	return (
-		<Button onClick={handleCameraToggle}>
+		<Button aria-label="Toggle camera on button" onClick={handleCameraToggle}>
 			{cameraIsOn ? (
 				<IoMdPower className="powerOn" />
 			) : (

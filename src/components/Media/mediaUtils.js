@@ -32,7 +32,6 @@ export async function cameraOn(
 			videoElement.play()
 		})
 	} catch (error) {
-		console.log("Error message: ", error.message)
 		showMessage(
 			"Sorry, could not use your camera. Did you give me permission in your browser? Check that you are not already using your camera in another app.",
 		)
@@ -62,7 +61,7 @@ export async function takePicture(
 			id: nanoid(),
 			alt: "Image taken with Instablam",
 			url: picture,
-			location: (await getLocation()) || "Location unknown",
+			location: (await getLocation(setStatusMessage)) || "Location unknown",
 			takenAt,
 		}
 		setLastImageTaken(picture)
@@ -82,14 +81,14 @@ export function handleImgError(event) {
 	event.currentTarget.alt = "A picture of a kitten."
 }
 
-async function getLocation() {
+async function getLocation(setStatusMessage) {
 	let location
 	// TODO: Set a state variable that switches an icon in the gallery,
 	// where the location text is written out
 	try {
 		location = await getImgLocation()
 	} catch (error) {
-		console.log("No location")
+		setStatusMessage("No location")
 	}
 	return location
 }

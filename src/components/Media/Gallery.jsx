@@ -15,12 +15,13 @@ export default function Gallery() {
 					return (
 						<Card key={`${obj.id}${index}`}>
 							<Image src={obj.url} alt={obj.alt} />
-							<figcaption>{`${obj.location}, ${obj.takenAt}`}</figcaption>
-							<a href={obj.url} download>
+							<figcaption aria-label="Photo location and date information">{`${obj.location}, ${obj.takenAt}`}</figcaption>
+							<a aria-label="Download selected photo" href={obj.url} download>
 								<MdDownload />
 								<p>Download</p>
 							</a>
 							<Button
+							aria-label="Delete selected photo"
 								onClick={() =>
 									deletePhoto(
 										galleryPictures,
