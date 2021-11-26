@@ -14,14 +14,23 @@ export default function Gallery() {
 				galleryPictures.map((obj, index) => {
 					return (
 						<Card key={`${obj.id}${index}`}>
-							<Image src={obj.url} alt={obj.alt} />
+							<Image
+								src={obj.url}
+								alt={obj.alt}
+								width="500"
+								height="500"
+							/>
 							<figcaption aria-label="Photo location and date information">{`${obj.location}, ${obj.takenAt}`}</figcaption>
-							<a aria-label="Download selected photo" href={obj.url} download>
+							<a
+								aria-label="Download selected photo"
+								href={obj.url}
+								download
+							>
 								<MdDownload />
 								<p>Download</p>
 							</a>
 							<Button
-							aria-label="Delete selected photo"
+								aria-label="Delete selected photo"
 								onClick={() =>
 									deletePhoto(
 										galleryPictures,
@@ -41,12 +50,11 @@ export default function Gallery() {
 }
 
 const Card = styled.div`
-border-bottom: 1px solid #222;
-border-bottom-left-radius: 10px;
-border-bottom-right-radius: 10px;
-margin-bottom: 0.5rem;
+	border-bottom: 1px solid #222;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	margin-bottom: 0.5rem;
 `
-
 
 const Image = styled.img`
 	height: auto;
