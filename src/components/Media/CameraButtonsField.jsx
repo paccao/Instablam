@@ -21,7 +21,15 @@ export default function CameraButtonsField() {
 	} = useContext(MediaContext)
 
 	useEffect(() => {
-		if (galleryPictures) setLastImageTaken(galleryPictures.at(-1).url)
+		if (galleryPictures) {
+			try {
+				setLastImageTaken(galleryPictures.at(-1).url)
+			} catch (error) {
+				console.log(
+					"Couldn't update the preview image of the last picture taken.",
+				)
+			}
+		}
 		setCameraIsOn(false)
 	}, [])
 
@@ -52,13 +60,13 @@ export default function CameraButtonsField() {
 				</Button>
 				<Link aria-label="Open gallery" to="/gallery">
 					<DefaultButton>
-						{lastImageTaken && (
+						{lastImageTaken && galleryPictures ? (
 							<PreviewImage
 								src={lastImageTaken}
 								alt="A preview of the last image taken in the gallery."
 								onError={handleImgError}
 							/>
-						)}
+						) : null}
 					</DefaultButton>
 				</Link>
 			</MarginContainer>
