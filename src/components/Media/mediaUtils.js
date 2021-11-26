@@ -10,7 +10,9 @@ export function cameraOff(videoElement, videoStream, setVideoStream) {
 export async function cameraOn(
 	context,
 	videoElement,
-	showMessage,
+	setStatusMessage,
+	setCameraIsOn,
+	statusMessageContainerRef,
 	optionalConstraints = {},
 ) {
 	let constraints
@@ -30,11 +32,14 @@ export async function cameraOn(
 		videoElement.srcObject = stream
 		videoElement.addEventListener("loadedmetadata", () => {
 			videoElement.play()
+			setCameraIsOn(true)
 		})
 	} catch (error) {
-		showMessage(
+		setStatusMessage(
 			"Sorry, could not use your camera. Did you give me permission in your browser? Check that you are not already using your camera in another app.",
 		)
+		statusMessageContainerRef.current.style.display = "block"
+		setCameraIsOn(false)
 	}
 }
 
@@ -45,6 +50,7 @@ export async function takePicture(
 	galleryPictures,
 	setGalleryPictures,
 	setStatusMessage,
+	statusMessageContainerRef
 ) {
 	try {
 		const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
@@ -61,13 +67,14 @@ export async function takePicture(
 			id: nanoid(),
 			alt: "Image taken with Instablam",
 			url: picture,
-			location: (await getLocation(setStatusMessage)) || "Location unknown",
+			location: (await getLocation(setStatusMessage, statusMessageContainerRef)) || "Location unknown",
 			takenAt,
 		}
 		setLastImageTaken(picture)
 		pushToStateArray(newPictureObj, galleryPictures, setGalleryPictures)
 	} catch (error) {
 		setStatusMessage(`Error occured! '${error.message}'.`)
+		statusMessageContainerRef.current.style.display = "block"
 	}
 }
 
@@ -81,7 +88,7 @@ export function handleImgError(event) {
 	event.currentTarget.alt = "A picture of a kitten."
 }
 
-async function getLocation(setStatusMessage) {
+async function getLocation(setStatusMessage, statusMessageContainerRef) {
 	let location
 	// TODO: Set a state variable that switches an icon in the gallery,
 	// where the location text is written out
@@ -89,6 +96,7 @@ async function getLocation(setStatusMessage) {
 		location = await getImgLocation()
 	} catch (error) {
 		setStatusMessage("No location")
+		statusMessageContainerRef.current.style.display = "block"
 	}
 	return location
 }

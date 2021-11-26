@@ -12,6 +12,7 @@ export default function CameraOnToggleBtn() {
 		setCameraIsOn,
 		setStatusMessage,
 		videoRef,
+		statusMessageContainerRef
 	} = useContext(MediaContext)
 
 	const handleCameraToggle = () => {
@@ -23,8 +24,9 @@ export default function CameraOnToggleBtn() {
 				{ videoStream, setVideoStream },
 				videoRef.current,
 				setStatusMessage,
+				setCameraIsOn,
+				statusMessageContainerRef,
 			)
-			setCameraIsOn(true)
 		}
 	}
 

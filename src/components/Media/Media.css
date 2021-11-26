@@ -16,3 +16,8 @@
 .powerOff {
 	color: #b44;
 }
+
+#statusMessageContainer {
+	position: absolute;
+	margin: 0em 2em;
+}

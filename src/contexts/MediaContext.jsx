@@ -26,6 +26,7 @@ export default function MediaProvider(props) {
 	const [cameraIsOn, setCameraIsOn] = useState(false)
 	const [statusMessage, setStatusMessage] = useState("")
 	const videoRef = useRef(null)
+	const statusMessageContainerRef = useRef(null)
 	const [canUseMD, setCanUseMD] = useState(false)
 
 	useEffect(() => {
@@ -65,6 +66,7 @@ export default function MediaProvider(props) {
 				videoRef,
 				canUseMD,
 				setCanUseMD,
+				statusMessageContainerRef,
 			}}
 		>
 			{props.children}

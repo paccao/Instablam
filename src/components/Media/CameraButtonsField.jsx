@@ -17,6 +17,7 @@ export default function CameraButtonsField() {
 		setGalleryPictures,
 		setStatusMessage,
 		setCameraIsOn,
+		statusMessageContainerRef,
 	} = useContext(MediaContext)
 
 	useEffect(() => {
@@ -34,6 +35,7 @@ export default function CameraButtonsField() {
 				galleryPictures,
 				setGalleryPictures,
 				setStatusMessage,
+				statusMessageContainerRef,
 			)
 	}
 
@@ -102,7 +104,7 @@ const DefaultButton = styled.div`
 const TakePicButton = styled.div`
 	background-color: #222;
 	border-radius: 50%;
-	color:#fff;
+	color: #fff;
 	width: 58px;
 	height: 58px;
 	display: flex;
