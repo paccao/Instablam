@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import Camera from "../components/Media/Camera"
-import Gallery from "../components/Media/Gallery"
 import CameraButtonsField from "../components/Media/CameraButtonsField"
 
 export default function CapturePage() {

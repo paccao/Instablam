@@ -17,7 +17,7 @@ export async function cameraOn(
 	// Checks if the camera should use default constraints or optional ones
 	if (!Object.keys(optionalConstraints).length) {
 		constraints = {
-			video: { facingMode: "user", width: 300, height: 200 },
+			video: { facingMode: "user", width: 500, height: 500 },
 			audio: false,
 		}
 	} else {
