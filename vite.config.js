@@ -15,10 +15,12 @@ export default defineConfig({
 			manifest: {
 				name: "Instablam",
 				short_name: "Instablam",
-				author: "Joel",
+				author: "Joel Plumppu",
 				description:
 					"Take pictures with your phone or computer's webcam and scroll through your gallery of pictures. You can also download the images you've taken.",
 				theme_color: "#333",
+				background_color: "#333",
+				display: "fullscreen",
 				default_locale: "en",
 				start_url: "/",
 				icons: [
