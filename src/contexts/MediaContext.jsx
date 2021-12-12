@@ -26,23 +26,13 @@ export default function MediaProvider(props) {
 	const [cameraIsOn, setCameraIsOn] = useState(false)
 	const [statusMessage, setStatusMessage] = useState("")
 	const videoRef = useRef(null)
+	const canvasRef = useRef(null)
 	const statusMessageContainerRef = useRef(null)
-	const [canUseMD, setCanUseMD] = useState(false)
 
 	useEffect(() => {
 		if (galleryPictures) setLastImageTaken(galleryPictures.at(-1).url)
 	}, [])
 
-	useEffect(() => {
-		//TODO: load local storage for persistance
-	}, [])
-
-	/**
-	 * Used to push a new object into a state array.
-	 * @param {{}} newObj New data to be passed to the specified array.
-	 * @param {[]} specifiedArr the read property of a specified state array
-	 * @param {function} setSpecifiedArr the write property of a specified state array
-	 */
 	function pushToStateArray(newObj, specifiedArr, setSpecifiedArr) {
 		setSpecifiedArr([...specifiedArr, newObj])
 	}
@@ -64,8 +54,7 @@ export default function MediaProvider(props) {
 				statusMessage,
 				setStatusMessage,
 				videoRef,
-				canUseMD,
-				setCanUseMD,
+				canvasRef,
 				statusMessageContainerRef,
 			}}
 		>
