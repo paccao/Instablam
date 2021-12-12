@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { MediaContext } from "../../contexts/MediaContext"
-import { deletePhoto } from "./mediaUtils"
+import { deletePhoto, Button } from "./mediaUtils"
 import styled from "styled-components"
 import { MdDownload } from "react-icons/md"
 import { BsTrash } from "react-icons/bs"
@@ -88,15 +88,4 @@ const Card = styled.div`
 const Image = styled.img`
 	height: auto;
 	width: 100%;
-`
-
-const Button = styled.button`
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-	height: max-content;
 `

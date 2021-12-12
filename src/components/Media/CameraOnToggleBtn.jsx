@@ -1,7 +1,6 @@
 import { useContext } from "react"
-import styled from "styled-components"
 import { IoMdPower } from "react-icons/io"
-import { cameraOff, cameraOn } from "../../components/Media/mediaUtils"
+import { cameraOff, cameraOn, Button } from "../../components/Media/mediaUtils"
 import { MediaContext } from "../../contexts/MediaContext"
 
 export default function CameraOnToggleBtn() {
@@ -40,14 +39,3 @@ export default function CameraOnToggleBtn() {
 		</Button>
 	)
 }
-
-const Button = styled.button`
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-	height: max-content;
-`

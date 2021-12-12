@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid"
+import styled from "styled-components"
 
 export function cameraOff(videoElement, videoStream, setVideoStream) {
 	videoElement.srcObject = null
@@ -132,3 +133,14 @@ function getImgTakenAt() {
 		currentdate.getSeconds()
 	return { date, time }
 }
+
+export const Button = styled.button`
+background: none;
+color: inherit;
+border: none;
+padding: 0;
+font: inherit;
+cursor: pointer;
+outline: inherit;
+height: max-content;
+`

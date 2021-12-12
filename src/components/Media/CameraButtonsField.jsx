@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { GiCircle } from "react-icons/gi"
 
 import { MediaContext } from "../../contexts/MediaContext"
-import { handleImgError, takePicture } from "./mediaUtils"
+import { handleImgError, takePicture, Button } from "./mediaUtils"
 import CameraOnToggleBtn from "./CameraOnToggleBtn"
 
 export default function CameraButtonsField() {
@@ -85,17 +85,6 @@ const MarginContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	margin: 0em 1.2em 0.5em 1.2em;
-`
-
-const Button = styled.button`
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
-	height: max-content;
 `
 
 const DefaultButton = styled.div`
