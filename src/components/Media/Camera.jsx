@@ -18,12 +18,8 @@ export default function Camera() {
 
 	return (
 		<div className="camera-container">
-			{canUseMD ? (
-				<>
-					<video ref={videoRef}></video>
-					<canvas ref={canvasRef}></canvas>
-				</>
-			) : null}
+			<video ref={videoRef}></video>
+			<canvas ref={canvasRef}></canvas>
 			<div ref={statusMessageContainerRef} id="statusMessageContainer">
 				<p>{statusMessage}</p>
 				<button

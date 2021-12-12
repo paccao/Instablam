@@ -1,6 +1,11 @@
 import { useContext } from "react"
 import { IoMdPower } from "react-icons/io"
-import { cameraOff, cameraOn, Button } from "../../components/Media/mediaUtils"
+import {
+	cameraOff,
+	cameraOn,
+	cameraCanvasOn,
+	Button,
+} from "../../components/Media/mediaUtils"
 import { MediaContext } from "../../contexts/MediaContext"
 
 export default function CameraOnToggleBtn() {
@@ -11,21 +16,41 @@ export default function CameraOnToggleBtn() {
 		setCameraIsOn,
 		setStatusMessage,
 		videoRef,
-		statusMessageContainerRef
+		canvasRef,
+		statusMessageContainerRef,
 	} = useContext(MediaContext)
 
 	const handleCameraToggle = () => {
-		if (cameraIsOn) {
-			cameraOff(videoRef.current, videoStream, setVideoStream)
-			setCameraIsOn(false)
+		// Check browser support
+		if ("ImageCapture" in window) {
+			if (cameraIsOn) {
+				cameraOff(videoRef.current, videoStream, setVideoStream)
+				setCameraIsOn(false)
+			} else {
+				cameraOn(
+					{ videoStream, setVideoStream },
+					videoRef.current,
+					setStatusMessage,
+					setCameraIsOn,
+					statusMessageContainerRef,
+				)
+			}
 		} else {
-			cameraOn(
-				{ videoStream, setVideoStream },
-				videoRef.current,
-				setStatusMessage,
-				setCameraIsOn,
-				statusMessageContainerRef,
-			)
+			// Firefox implementation
+			if (cameraIsOn) {
+				// cameraOff()
+				setCameraIsOn(false)
+			} else {
+				cameraCanvasOn(
+					canvasRef.current,
+					videoRef.current,
+					videoStream,
+					setVideoStream,
+					statusMessageContainerRef,
+					setStatusMessage,
+					setCameraIsOn,
+				)
+			}
 		}
 	}
 

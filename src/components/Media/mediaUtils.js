@@ -44,6 +44,49 @@ export async function cameraOn(
 	}
 }
 
+export async function cameraCanvasOn(
+	canvas,
+	video,
+	videoStream,
+	setVideoStream,
+	statusMessageContainerRef,
+	setStatusMessage,
+	setCameraIsOn,
+) {
+	const context = canvas.getContext("2d")
+
+	const constraints = {
+		video: { facingMode: "user", width: 500, height: 500 },
+		audio: false,
+	}
+
+	try {
+		const stream = await navigator.mediaDevices.getUserMedia(constraints)
+		setVideoStream(stream)
+		video.srcObject = stream
+	} catch (error) {
+		setStatusMessage("No camera found.")
+		statusMessageContainerRef.current.style.display = "block"
+		setCameraIsOn(false)
+	}
+
+	return new Promise((resolve, reject) => {
+		video.addEventListener("loadeddata", async () => {
+			const { videoWidth, videoHeight } = video
+			canvas.width = videoWidth
+			canvas.height = videoHeight
+
+			try {
+				await video.play()
+				context.drawImage(video, 0, 0, videoWidth, videoHeight)
+				canvas.toBlob(resolve, "image/png")
+			} catch (error) {
+				reject(error)
+			}
+		})
+	})
+}
+
 export async function takePicture(
 	videoStream,
 	setLastImageTaken,
@@ -51,7 +94,7 @@ export async function takePicture(
 	galleryPictures,
 	setGalleryPictures,
 	setStatusMessage,
-	statusMessageContainerRef
+	statusMessageContainerRef,
 ) {
 	try {
 		const imageCapture = new ImageCapture(videoStream.getVideoTracks()[0])
@@ -68,7 +111,9 @@ export async function takePicture(
 			id: nanoid(),
 			alt: "Image taken with Instablam",
 			url: picture,
-			location: (await getLocation(setStatusMessage, statusMessageContainerRef)) || "Location unknown",
+			location:
+				(await getLocation(setStatusMessage, statusMessageContainerRef)) ||
+				"Location unknown",
 			takenAt,
 		}
 		setLastImageTaken(picture)
@@ -81,7 +126,7 @@ export async function takePicture(
 
 export function deletePhoto(gallery, setGalleryPictures, id) {
 	const newPhotosArr = gallery.filter((picture) => picture.id !== id)
-	setGalleryPictures(()=>[...newPhotosArr])
+	setGalleryPictures(() => [...newPhotosArr])
 }
 
 export function handleImgError(event) {
@@ -135,12 +180,12 @@ function getImgTakenAt() {
 }
 
 export const Button = styled.button`
-background: none;
-color: inherit;
-border: none;
-padding: 0;
-font: inherit;
-cursor: pointer;
-outline: inherit;
-height: max-content;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+	height: max-content;
 `

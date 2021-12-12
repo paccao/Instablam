@@ -9,6 +9,10 @@
 	width: 100%;
 	height: auto;
 }
+.camera-container canvas {
+	width: 100%;
+	height: auto;
+}
 
 .powerOn {
 	color: #4b4;
