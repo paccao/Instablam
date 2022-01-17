@@ -9,17 +9,14 @@ export default function Gallery() {
 	const { galleryPictures, setGalleryPictures } = useContext(MediaContext)
 
 	return (
-		<div>
+		<RootContainer>
 			{galleryPictures &&
 				galleryPictures.map((obj, index) => {
 					return (
 						<Card key={`${obj.id}${index}`}>
-							<Image
-								src={obj.url}
-								alt={obj.alt}
-								width="500"
-								height="500"
-							/>
+							<div className="imageBox">
+								<Image src={obj.url} alt={obj.alt} />
+							</div>
 							<Figc aria-label="Photo location and date information">{`${obj.location}, ${obj.takenAt}`}</Figc>
 							<BottomLinks>
 								<a
@@ -51,11 +48,16 @@ export default function Gallery() {
 						</Card>
 					)
 				})}
-		</div>
+		</RootContainer>
 	)
 }
 
+const RootContainer = styled.div`
+	width: 100%;
+`
+
 const BottomLinks = styled.div`
+	width: 100%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -71,10 +73,22 @@ const MiniContainer = styled.div`
 `
 
 const Card = styled.div`
+	width: 100%;
 	border-bottom: 1px solid #222;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	margin-bottom: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.imageBox {
+		position: relative;
+		max-width: 100%;
+		max-height: auto;
+		width: 700px;
+		height: auto;
+	}
 
 	a {
 		color: #dd88dd;
@@ -86,6 +100,15 @@ const Card = styled.div`
 `
 
 const Image = styled.img`
-	height: auto;
+	/* max-width: 100%;
+	max-height: auto; */
+	/* position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0; */
 	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	/* object-position: center; */
 `

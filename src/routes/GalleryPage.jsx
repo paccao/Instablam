@@ -6,21 +6,29 @@ import styled from "styled-components"
 export default function GalleryPage() {
 	const [galleryFullscreen, setGalleryFullscreen] = useState(true)
 	return (
-		<Container>
-			<GalleryHeader
-				galleryFullscreen={galleryFullscreen}
-				setGalleryFullscreen={setGalleryFullscreen}
-			/>
-			{galleryFullscreen ? <Gallery /> : null}
-		</Container>
+		<RootContainer>
+			<div className="container">
+				<GalleryHeader
+					galleryFullscreen={galleryFullscreen}
+					setGalleryFullscreen={setGalleryFullscreen}
+				/>
+				{galleryFullscreen ? <Gallery /> : null}
+			</div>
+		</RootContainer>
 	)
 }
 
-const Container = styled.div`
+const RootContainer = styled.div`
 	background-color: #333;
 	position: relative;
-	min-height: 100vh;
-	width: 100vw;
 	display: flex;
-	flex-direction:column;
+	flex-direction: column;
+	align-items: center;
+
+	.container {
+		min-height: 100vh;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+	}
 `
